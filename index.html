@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Geospatial Mashup</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        #map {
+            width: 100%;
+            height: 600px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map"></div>
+    <script>
+        // --- Inisialisasi Peta ---
+        var mymap = L.map('map').setView([-6.175378, 106.827142], 14);
+        // --- Basemap OpenStreetMap ---
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">' +
+                'OpenStreetMap</a> contributors'
+        }).addTo(mymap);
+        // --- Marker (Objek Titik) ---
+        var marker = L.marker([-6.175378, 106.827142]).addTo(mymap);
+        marker.bindPopup('<b>Monumen Nasional (Monas)</b><br>Monumen Nasional adalah sebuah obelisk setinggi 132 meter yang terletak di pusat Lapangan Merdeka, Jakarta Pusat. Monumen ini merupakan monumen nasional Republik Indonesia yang dibangun untuk mengenang perjuangan kemerdekaan Indonesia.');
+        // --- Circle (Objek Lingkaran) ---
+        var circle = L.circle([ -6.170302, 106.834877], {
+            color: '#FF1493', fillColor: '#FFC0CB',
+            fillOpacity: 0.5, radius: 200
+        }).addTo(mymap);
+        circle.bindPopup('Radius 200 meter dari titik ini.');
+        // --- Polygon (Objek Area) ---
+        var polygon = L.polygon([
+            [-6.167710, 106.820771], [-6.172604, 106.821620],
+            [-6.175864, 106.820421], [-6.184614, 106.814857],
+            [-6.181743, 106.813530], [-6.171146, 106.810792],
+            [-6.169603, 106.818794]
+        ], { color: '#2E8B58', fillColor: '#00FF7F', fillOpacity: 0.3 })
+            .addTo(mymap);
+        polygon.bindPopup('Area Gambir dan Petojo Selatan, sebagian daerah Tanah Abang');
+        // --- Polyline (Objek Garis) ---
+        var polyline = L.polyline([
+            [-6.183317, 106.822936], [-6.182614, 106.833535],
+            [-6.183479, 106.834525], [-6.182156, 106.836092],
+            [-6.181740, 106.836914], [-6.181123, 106.839057],
+            [-6.179194, 106.841676]
+        ], { color: '#FF0000', weight: 3, opacity: 0.8 })
+            .addTo(mymap);
+        polyline.bindPopup('Jalan Kebon Sirih');
+    </script>
+</body>
+
+</html>
